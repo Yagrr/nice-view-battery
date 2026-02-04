@@ -122,7 +122,7 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
 
     lv_obj_t *art = lv_img_create(widget->obj);
     lv_img_set_src(art, &face);
-    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 9);
+    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 0);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
