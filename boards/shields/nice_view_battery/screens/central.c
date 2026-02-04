@@ -43,7 +43,7 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
 
     draw_battery_status(canvas, state);
     // Draw face
-    lv_canvas_draw_img(canvas, 0, -6, &face, NULL);
+    lv_canvas_draw_img(canvas, 0, -9, &face, NULL);
 
     rotate_canvas(canvas, cbuf, CANVAS_SIZE);
 }
@@ -167,7 +167,7 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(top, widget->cbuf, TOP_SIZE, TOP_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *middle = lv_canvas_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 6);
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 9);
     lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
