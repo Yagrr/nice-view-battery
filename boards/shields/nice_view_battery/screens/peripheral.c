@@ -16,6 +16,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "peripheral.h"
 #include "../widgets/output.h"
 #include "../widgets/battery.h"
+// Declare ninajirachi widget face
+extern const lv_img_dsc_t face;
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -35,6 +37,8 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     draw_background(canvas, CANVAS_SIZE);
 
     draw_battery_status(canvas, state);
+    // Draw face
+    lv_canvas_draw_img(canvas, 0, -6, &face, NULL);
 
     rotate_canvas(canvas, cbuf, CANVAS_SIZE);
 }
