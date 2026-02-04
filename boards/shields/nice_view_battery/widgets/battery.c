@@ -4,6 +4,7 @@
 
 #define OFFSET_X 29
 #define OFFSET_Y 37
+#define BATTERY_Y_OFFSET 10
 
 LV_IMG_DECLARE(bolt);
 LV_IMG_DECLARE(battery);
@@ -19,9 +20,9 @@ void draw_battery_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &font, LV_TEXT_ALIGN_CENTER);
 
-    lv_canvas_draw_img(canvas, 0, 0, &battery, &img_dsc);
-    lv_canvas_draw_rect(canvas, 4, 4, 54 * state->battery / 100, 23, &rect_dsc);
-    lv_canvas_draw_img(canvas, 2, 2, &battery_mask, &img_dsc);
+    lv_canvas_draw_img(canvas, 0, 0 + BATTERY_Y_OFFSET, &battery, &img_dsc);
+    lv_canvas_draw_rect(canvas, 4, 4 + BATTERY_Y_OFFSET, 54 * state->battery / 100, 23, &rect_dsc);
+    lv_canvas_draw_img(canvas, 2, 2 + BATTERY_Y_OFFSET, &battery_mask, &img_dsc);
 
     char text[10] = {};
     sprintf(text, "%i%%", state->battery);
@@ -32,14 +33,14 @@ void draw_battery_status(lv_obj_t *canvas, const struct status_state *state) {
     for (int dx = -1; dx <= 1; dx++) {
         for (int dy = -1; dy <= 1; dy++) {
             if (dx != 0 || dy != 0) {
-                lv_canvas_draw_text(canvas, dx, y + dy, w, &outline_dsc, text);
+                lv_canvas_draw_text(canvas, dx, y + dy + BATTERY_Y_OFFSET, w, &outline_dsc, text);
             }
         }
     }
 
-    lv_canvas_draw_text(canvas, 0, y, w, &label_dsc, text);
+    lv_canvas_draw_text(canvas, 0, y + BATTERY_Y_OFFSET, w, &label_dsc, text);
 
     if (state->charging) {
-        lv_canvas_draw_img(canvas, OFFSET_X, OFFSET_Y, &bolt, &img_dsc);
+        lv_canvas_draw_img(canvas, OFFSET_X, OFFSET_Y + BATTERY_Y_OFFSET, &bolt, &img_dsc);
     }
 }
