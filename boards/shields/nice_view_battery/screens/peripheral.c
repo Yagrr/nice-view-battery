@@ -22,6 +22,11 @@ LV_IMG_DECLARE(face);
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 // Draw
+static void draw_face(lv_obj_t *canvas) {
+    lv_draw_dsc_t img_dsc;
+    lv_draw_img_dsc_init(&img_dsc);
+    lv_canvas_draw_img(canvas, 0, 0, &face, &img_dsc)
+}
 
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
@@ -37,6 +42,7 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     draw_background(canvas, CANVAS_SIZE);
 
     draw_battery_status(canvas, state);
+    draw_face(canvas, state);
 
     rotate_canvas(canvas, cbuf, CANVAS_SIZE);
 }

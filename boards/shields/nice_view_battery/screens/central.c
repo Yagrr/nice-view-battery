@@ -27,6 +27,11 @@ LV_IMG_DECLARE(face);
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 // Draw
+static void draw_face(lv_obj_t *canvas) {
+    lv_draw_dsc_t img_dsc;
+    lv_draw_img_dsc_init(&img_dsc);
+    lv_canvas_draw_img(canvas, 0, 0, &face, &img_dsc)
+}
 
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
@@ -42,6 +47,7 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     draw_background(canvas, CANVAS_SIZE);
 
     draw_battery_status(canvas, state);
+    draw_face(canvas, state);
 
     rotate_canvas(canvas, cbuf, CANVAS_SIZE);
 }
@@ -172,9 +178,9 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -40, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
-    lv_obj_t *art = lv_img_create(widget->obj);
-    lv_img_set_src(art, &face);
-    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 9);
+    // lv_obj_t *art = lv_img_create(widget->obj);
+    // lv_img_set_src(art, &face);
+    // lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 0);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
