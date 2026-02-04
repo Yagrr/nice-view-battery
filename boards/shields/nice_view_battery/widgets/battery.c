@@ -4,7 +4,7 @@
 
 #define OFFSET_X 29
 #define OFFSET_Y 37
-#define BATTERY_Y_OFFSET 0
+#define BATTERY_Y_OFFSET 16
 
 LV_IMG_DECLARE(bolt);
 LV_IMG_DECLARE(battery);
