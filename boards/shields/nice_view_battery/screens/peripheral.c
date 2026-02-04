@@ -111,7 +111,7 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(top, widget->cbuf, TOP_SIZE, TOP_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *middle = lv_canvas_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 12);
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 0);
     lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
 #if IS_ENABLED(CONFIG_NICE_VIEW_WIDGET_INVERTED)
