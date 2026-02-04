@@ -22,7 +22,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "../widgets/profile.h"
 #include "../widgets/layer.h"
 // Declare ninajirachi widget face
-LV_IMG_DECLARE(face);
+extern const lv_img_dsc_t face;
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
