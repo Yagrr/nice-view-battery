@@ -106,12 +106,16 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
 
+    lv_obj_t *art = lv_img_create(widget->obj);
+    lv_img_set_src(art, &face);
+    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 0);
+
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, TOP_SIZE, TOP_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *middle = lv_canvas_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 12);
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 15);
     lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
 #if IS_ENABLED(CONFIG_NICE_VIEW_WIDGET_INVERTED)
@@ -119,10 +123,6 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -40, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 #endif
-
-    lv_obj_t *art = lv_img_create(widget->obj);
-    lv_img_set_src(art, &face);
-    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 0);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
