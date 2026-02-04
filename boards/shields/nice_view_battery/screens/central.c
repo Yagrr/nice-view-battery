@@ -22,7 +22,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "../widgets/profile.h"
 #include "../widgets/layer.h"
 // Declare ninajirachi widget face
-extern const lv_img_dsc_t face;
+LV_IMG_DECLARE(face);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -42,8 +42,6 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     draw_background(canvas, CANVAS_SIZE);
 
     draw_battery_status(canvas, state);
-    // Draw face
-    lv_canvas_draw_img(canvas, 0, -12, &face, NULL);
 
     rotate_canvas(canvas, cbuf, CANVAS_SIZE);
 }
@@ -169,10 +167,14 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_obj_t *middle = lv_canvas_create(widget->obj);
     lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 28, 12);
     lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
-
+    
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
     lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -40, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+
+    lv_obj_t *art = lv_img_create(widget->obj);
+    lv_obj_align(art, LV_ALIGN_TOP_LEFT, 28, 8);
+    lv_img_set_src(art, &face);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
